@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class InputHandler
   def get_input
     input_lines = []

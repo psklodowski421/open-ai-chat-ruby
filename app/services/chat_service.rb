@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChatService
   def initialize
     @pastel = Pastel.new
@@ -11,9 +13,7 @@ class ChatService
 
     loop do
       input = @input_handler.get_input
-
       add_message(chat, 'user', input)
-
       response = nil
       output_message = nil
 
@@ -41,8 +41,8 @@ class ChatService
 
   def add_message(chat, role, content)
     ActiveRecord::Base.logger.silence do
-      Message.create(chat: chat, role: role, content: content)
-      @messages << { role: role, content: content }
+      Message.create(chat:, role:, content:)
+      @messages << { role:, content: }
     end
   end
 end

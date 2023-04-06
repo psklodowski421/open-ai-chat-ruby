@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ResponseHandler
   def initialize
     @pastel = Pastel.new

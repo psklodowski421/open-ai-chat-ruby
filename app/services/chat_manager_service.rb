@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ChatManagerService
   def call
     ActiveRecord::Base.logger.silence do
