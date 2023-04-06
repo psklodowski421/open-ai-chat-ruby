@@ -14,14 +14,18 @@ class ChatService
 
       add_message(chat, 'user', input)
 
-      response = OpenaiService.new(@messages).chat
-      output_message = @response_handler.get_output_message(response)
+      response = nil
+      output_message = nil
 
-      add_message(chat, 'assistant', output_message)
+      @spinner_handler.run do
+        response = OpenaiService.new(@messages).chat
+        output_message = @response_handler.get_output_message(response)
 
-      audio_data = PollyService.new(output_message).synthesize_speech
-      @response_handler.save_audio_to_file(audio_data)
+        add_message(chat, 'assistant', output_message)
 
+        audio_data = PollyService.new(output_message).synthesize_speech
+        @response_handler.save_audio_to_file(audio_data)
+      end
       @response_handler.play_audio_response
       @response_handler.print_response(response, output_message)
     end
