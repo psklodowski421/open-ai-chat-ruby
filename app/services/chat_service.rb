@@ -18,12 +18,12 @@ class ChatService
       output_message = nil
 
       @spinner_handler.run do
-        response = OpenaiService.new(@messages).chat
+        response = Integrations::OpenaiService.new(@messages).chat
         output_message = @response_handler.get_output_message(response)
 
         add_message(chat, 'assistant', output_message)
 
-        audio_data = PollyService.new(output_message).synthesize_speech
+        audio_data = Integrations::PollyService.new(output_message).synthesize_speech
         @response_handler.save_audio_to_file(audio_data)
       end
       @response_handler.play_audio_response

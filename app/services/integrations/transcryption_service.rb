@@ -2,15 +2,6 @@
 
 module Integrations
   class TranscryptionService
-    def test
-      result = Benchmark.measure do
-        # Code to be benchmarked
-        TranscryptionService.new.real_time_transcript('tmp/output.wav')
-      end
-
-      puts "Execution time: #{result.real} seconds"
-    end
-
     def real_time_transcript(audio_file_path)
       async_client = Aws::TranscribeStreamingService::AsyncClient.new
 
